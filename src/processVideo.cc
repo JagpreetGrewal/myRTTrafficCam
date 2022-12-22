@@ -18,6 +18,9 @@ int main(int argc, char** argv)
 
     // Open the video file
     // VideoCapture video(file_path);
+
+    // mp4 file must be in the same directory as the executable
+    // in the bin for this code
     VideoCapture video("traffic2.mp4");
 
     // Check if the video was opened successfully
