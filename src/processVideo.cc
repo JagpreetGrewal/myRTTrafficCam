@@ -9,16 +9,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    // Open the video stream
-    // Replace [IP_ADDRESS], [PORT], and [STREAM_URL] with the appropriate values for your stream
-    //  VideoCapture cap("http://[IP_ADDRESS]:[PORT]/[STREAM_URL]"); 
-
-    // Set the file path to the video file
-    // string file_path = "${VIDEO_FILE_PATH}";
-
-    // Open the video file
-    // VideoCapture video(file_path);
-
+    // Open the video 
     // mp4 file must be in the same directory as the executable
     // in the bin for this code
     VideoCapture video("traffic2.mp4");
@@ -36,6 +27,20 @@ int main(int argc, char** argv)
     // Create a window to display the video
     namedWindow("Video", cv::WINDOW_AUTOSIZE);
 
+    // Set up the background subtractor
+    Ptr<BackgroundSubtractor> bgSubtractor = createBackgroundSubtractorMOG2();
+
+    // Set up the blob detector
+    Ptr<SimpleBlobDetector> blobDetector = SimpleBlobDetector::create();
+
+    // Set up the keypoint drawers
+    Mat drawFrame;
+    vector<KeyPoint> keypoints;
+
+    // Initialize the counters
+    int frameCounter = 0;
+    int carCounter = 0;
+
     // Read and display the video frames
     while (true) {
         Mat frame;
@@ -45,11 +50,37 @@ int main(int argc, char** argv)
             break;
         }
 
+        // Convert the frame to grayscale
+        Mat grayFrame;
+        cvtColor(frame, grayFrame, COLOR_BGR2GRAY);
+
+        // Subtract the background
+        Mat fgMask;
+        bgSubtractor->apply(grayFrame, fgMask);
+
+        // Detect blobs
+        blobDetector->detect(fgMask, keypoints);
+
+        // Draw the keypoints on the frame
+        drawKeypoints(frame, keypoints, drawFrame, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+
+        // Update the counters
+        frameCounter++;
+        carCounter += keypoints.size();
+
         imshow("Video", frame);
         if (waitKey(30) >= 0) {
             break;
         }
     }
+
+ // Calculate the average number of cars per frame
+    double avgCarsPerFrame = (double) carCounter / frameCounter;
+
+    // Print the results
+    cout << "Number of frames: " << frameCounter << endl;
+    cout << "Number of cars detected: " << carCounter << endl;
+    cout << "Average number of cars per frame: " << avgCarsPerFrame << endl;
 
     return 0;
 }
