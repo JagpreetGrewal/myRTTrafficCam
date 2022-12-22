@@ -23,17 +23,8 @@ set (CMAKE_CXX_FLAGS "-g -D _POSIX_C_SOURCE=200809L -Wno-unused-function -Werror
 set (OUTDIR ../bin)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTDIR})
 
-# Add the video file to the project's source files
-set(VIDEO_FILE "src/traffic2.mp4")
-
-add_executable(processVideo src/processVideo.cc ${VIDEO_FILE})
+add_executable(processVideo src/processVideo.cc)
 target_link_libraries(processVideo ${OpenCV_LIBS} ${GST_LIBRARIES})
-
-# Set the file path to the video file
-set(VIDEO_FILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${VIDEO_FILE}")
-
-# Set the video file path in the code
-configure_file(src/processVideo.cc "${CMAKE_CURRENT_BINARY_DIR}/src/processVideo.cc" @ONLY)
 
 foreach(flag ${GST_CFLAGS_OTHER})
   set_property(TARGET processVideo APPEND_STRING PROPERTY COMPILE_FLAGS " ${flag}")
