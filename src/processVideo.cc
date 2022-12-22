@@ -13,55 +13,40 @@ int main(int argc, char** argv)
     // Replace [IP_ADDRESS], [PORT], and [STREAM_URL] with the appropriate values for your stream
     //  VideoCapture cap("http://[IP_ADDRESS]:[PORT]/[STREAM_URL]"); 
 
-        // Set the file path to the video file
-    string file_path = "${VIDEO_FILE_PATH}";
+    // Set the file path to the video file
+    // string file_path = "${VIDEO_FILE_PATH}";
 
-    // for videos
-    VideoCapture cap(file_path, CAP_FFMPEG);
-    
-    // for streaming
-    // VideoCapture cap(file_path, CAP_V4L2); // 0 indicates the default camera
-    if (!cap.isOpened())
-    {
-        cerr << "ERROR: Unable to open the video" << endl;
-        return -1;
+    // Open the video file
+    // VideoCapture video(file_path);
+    VideoCapture video("traffic2.mp4");
+
+    // Check if the video was opened successfully
+    if (!video.isOpened()) {
+        std::cout << "Error: Could not open video!" << std::endl;
+        return 1;
     }
 
-    // Set the video resolution
-    cap.set(CAP_PROP_FRAME_WIDTH, 640);
-    cap.set(CAP_PROP_FRAME_HEIGHT, 480);
+    // Get the video frame size
+    Size frameSize = Size((int) video.get(CAP_PROP_FRAME_WIDTH),
+                                  (int) video.get(CAP_PROP_FRAME_HEIGHT));
 
     // Create a window to display the video
-    namedWindow("Traffic", WINDOW_AUTOSIZE);
+    namedWindow("Video", cv::WINDOW_AUTOSIZE);
 
-    // Process the video stream
-    while (true)
-    {
-        // Get the next frame from the video stream
+    // Read and display the video frames
+    while (true) {
         Mat frame;
-        cap >> frame;
+        video >> frame;
 
-        // Check if the frame is empty
-        if (frame.empty())
-        {
-            cerr << "ERROR: Unable to grab from the video" << endl;
+        if (frame.empty()) {
             break;
         }
 
-        // Display the frame in the window
-        imshow("Traffic", frame);
-
-        // Check if the user pressed 'q' to quit
-        char c = (char)waitKey(10);
-        if (c == 'q')
-        {
+        imshow("Video", frame);
+        if (waitKey(30) >= 0) {
             break;
         }
     }
-
-    // Close the video stream and the window
-    cap.release();
-    destroyAllWindows();
 
     return 0;
 }
