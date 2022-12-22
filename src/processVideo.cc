@@ -12,7 +12,7 @@ int main(int argc, char** argv)
     // Open the video 
     // mp4 file must be in the same directory as the executable
     // in the bin for this code
-    VideoCapture video("traffic2.mp4");
+    VideoCapture video("trafficStream2.mp4");
 
     // Check if the video was opened successfully
     if (!video.isOpened()) {
