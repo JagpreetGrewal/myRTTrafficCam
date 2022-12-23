@@ -16,7 +16,7 @@ The bin directory will likely be removed from github at some point (to save data
 ## Running
 Input the following commands to run the program:
 ```bash
-cd ../script
+cd script/
 ./processStream.sh
 ```
 Please ignore the other script for now.
