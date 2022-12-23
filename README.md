@@ -18,5 +18,7 @@ Input the following commands to run the program:
 ```bash
 cd script/
 ./processStream.sh
+cd ../bin
+./processVideo
 ```
 Please ignore the other script for now.
