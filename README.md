@@ -1,5 +1,5 @@
 # myRTTrafficCam
-A primitive application to pull data from a live youtube stream and process it
+A primitive application to pull data from a live youtube stream and process it.
 
 Note: Features are currently in development. Before compiling, make sure OpenCV 4.5.1 and GStreamer 1.18.4 are installed (more package details will be provided later).
 
