@@ -26,7 +26,7 @@ from_pre_command_print=$(date -u "+%T" -d @$from_pre)
 from_command_print=$(date -u "+%T" -d @$(($from - $from_pre)))$(grep -o "\..*" <<< $2)
 to_command_print=$(date -u "+%T" -d @$(($to - $from_pre)))$(grep -o "\..*" <<< $3)
 
-command="ffmpeg "
+command="ffmpeg -y "
 
 for uri in $(youtube-dl -g $1)
 do
