@@ -22,3 +22,5 @@ Please ignore the other script, it is used by this one.
 If you wish to modify parameters like the url, start time, or end time, then modify the startStream.sh script.
 For livestreams, start close to 0:00:0 for live footage.
 Starting directly at 0:00:0 may cause issues with downloading the video.
+
+The data is outputted both to terminal, as well as a txt file located in the bin directory.
