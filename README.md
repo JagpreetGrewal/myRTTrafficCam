@@ -17,7 +17,7 @@ The bin directory will likely be removed from github at some point (to save data
 Input the following commands to run the program:
 ```bash
 cd script/
-./processStream.sh
+./processStream.sh #follow the instructions that appear in the terminal
 cd ../bin
 ./processVideo
 ```
