@@ -16,9 +16,10 @@ The bin directory will likely be removed from github at some point (to save data
 ## Running
 Input the following commands to run the program:
 ```bash
-cd script/
-./processStream.sh #follow the instructions that appear in the terminal
-cd ../bin
-./processVideo
+cd script
+./startStream.sh
 ```
-Please ignore the other script for now.
+Please ignore the other script, it is used by this one.
+If you wish to modify parameters like the url, start time, or end time, then modify the startStream.sh script.
+For livestreams, start close to 0:00:0 for live footage.
+Starting directly at 0:00:0 may cause issues with downloading the video.
