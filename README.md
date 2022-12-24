@@ -11,7 +11,6 @@ mkdir -p bin
 cd build && cmake ..
 make -jN
 ```
-The bin directory will likely be removed from github at some point (to save data from cloning mp4 files), so the command to create it is kept here.
 
 ## Running
 Input the following commands to run the program:
