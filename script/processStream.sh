@@ -5,7 +5,7 @@
 if [ $# -lt 4 ]; then
         echo "Usage: $0 <youtube's URL> <HH:mm:ss from time> <HH:mm:ss to time> <output_file_name>"
         echo "e.g.:"
-        echo "$0 https://www.youtube.com/watch?v=LLHt5P36B8E 0:00:5 0:00:10 ../bin/trafficStream2.mp4"
+        echo "$0 https://www.youtube.com/watch?v=LLHt5P36B8E 0:00:5 0:00:10 /path/to/trafficStream.mp4"
         echo "downloading footage from an ongoing livestream should start from 0:00:5, as starting earlier may result in no data"
         exit 1
 fi

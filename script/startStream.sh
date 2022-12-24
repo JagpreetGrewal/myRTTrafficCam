@@ -5,7 +5,7 @@ while true; do
   url="https://www.youtube.com/watch?v=LLHt5P36B8E"
 
   # Set the output file name, have it output to the script directory
-  output_file="trafficStream2.mp4"
+  output_file="trafficStream.mp4"
 
   start_time="0:00:5"
 

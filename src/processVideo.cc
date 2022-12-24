@@ -10,9 +10,9 @@ using namespace std;
 int main(int argc, char** argv)
 {
     // Open the video 
-    // mp4 file must be in the same directory as the executable
-    // in the bin for this code
-    VideoCapture video("trafficStream2.mp4");
+    // The video must be in the same directory as the startStream.sh script
+    // If running the processVideo executable directly, put the video in the bin directory
+    VideoCapture video("trafficStream.mp4");
 
     // Check if the video was opened successfully
     if (!video.isOpened()) {
