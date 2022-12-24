@@ -3,11 +3,14 @@
 #include "opencv4/opencv2/videoio.hpp"
 
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <ctime>
 
 using namespace cv;
 using namespace std;
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
     // Open the video 
     // The video must be in the same directory as the startStream.sh script
@@ -74,13 +77,32 @@ int main(int argc, char** argv)
         }
     }
 
- // Calculate the average number of cars per frame
+    // Calculate the average number of cars per frame
     double avgCarsPerFrame = (double) carCounter / frameCounter;
 
     // Print the results
     cout << "Number of frames: " << frameCounter << endl;
     cout << "Number of cars detected: " << carCounter << endl;
     cout << "Average number of cars per frame: " << avgCarsPerFrame << endl;
+
+
+    // Print the results to the text file
+    std::ofstream outfile;
+    outfile.open("../bin/trafficResults.txt", std::ios::app); // open the file in append mode
+
+    // Include the current time for the text file
+    time_t t = time(nullptr);
+    tm tm = *std::localtime(&t);
+    char time_str[100];
+    std::strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", &tm);
+
+    outfile << "Current time: " << time_str << endl;
+    outfile << "Number of frames: " << frameCounter << endl;
+    outfile << "Number of cars detected: " << carCounter << endl;
+    outfile << "Average number of cars per frame: " << avgCarsPerFrame << endl;
+    outfile << "******************************************\n";
+
+    outfile.close();
 
     return 0;
 }
